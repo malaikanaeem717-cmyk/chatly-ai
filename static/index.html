@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Chatly AI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#14100c">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/styles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+</head>
+<body>
+
+  <div id="splash">
+    <div id="bubbleField"></div>
+    <div class="splash-content">
+      <div class="logo-circle">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H8l-4.7 3.5A.5.5 0 0 1 2.5 20V5a1 1 0 0 1 1-1z" fill="#151626"/>
+          <circle cx="8.5" cy="10.5" r="1.3" fill="#ffffff"/>
+          <circle cx="13" cy="10.5" r="1.3" fill="#ffffff"/>
+          <circle cx="17.5" cy="10.5" r="1.3" fill="#ffffff"/>
+        </svg>
+      </div>
+      <h1>Chatly AI</h1>
+      <p class="tagline">Apka smart AI saathi</p>
+      <div class="splash-dots"><span></span><span></span><span></span></div>
+    </div>
+  </div>
+
+  <div id="sidebarOverlay"></div>
+
+  <div id="app" class="reveal-after-splash">
+    <!-- SIDEBAR -->
+    <div id="sidebar">
+      <div class="sidebar-header">
+        <span>Chatly AI</span>
+        <button id="closeSidebarBtn">✕</button>
+      </div>
+      <button id="newChatBtn">+ New Chat</button>
+
+      <div id="chatList"></div>
+
+      <div id="userBar">
+        <span id="userEmail"></span>
+        <button id="logoutBtn">Logout</button>
+      </div>
+    </div>
+
+    <!-- CHAT AREA -->
+    <div id="chatArea">
+      <header>
+        <button id="menuBtn">☰</button>
+        <span id="chatTitle">Chatly AI</span>
+      </header>
+
+      <div id="messages">
+        <div class="empty-state" id="emptyState">
+          Start a new chat, upload a document, or generate an image 👋
+        </div>
+      </div>
+
+      <div id="attachmentBar" class="attachment-bar"></div>
+
+      <div id="imageStylesBar">
+        <span class="style-chip active" data-style="realistic">Realistic</span>
+        <span class="style-chip" data-style="artistic">Artistic</span>
+        <span class="style-chip" data-style="anime">Anime</span>
+        <span class="style-chip" data-style="3d">3D Render</span>
+      </div>
+
+      <div id="inputBar">
+        <input type="file" id="fileInput" accept=".pdf,.docx,.txt" style="display:none">
+
+        <div class="input-inner">
+          <div class="plus-wrap">
+            <button id="plusBtn" title="Add">+</button>
+            <div id="plusMenu" class="plus-menu">
+              <div class="plus-menu-item" id="menuUpload"><span>📎</span> Upload a document</div>
+              <div class="plus-menu-item" id="menuImage"><span>🖼️</span> Create an image</div>
+            </div>
+          </div>
+
+          <input type="text" id="userInput" placeholder="Type a message..." autocomplete="off">
+          <button id="sendBtn">➤</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="editorOverlay">
+    <div class="editor-shell">
+      <div class="editor-header">
+        <h3>Edit Image Text</h3>
+        <button class="editor-close" id="editorCloseBtn">✕</button>
+      </div>
+      <div class="editor-body">
+        <div class="editor-canvas-wrap">
+          <canvas id="editorCanvas"></canvas>
+        </div>
+        <div class="editor-controls">
+          <div class="editor-row">
+            <button class="editor-btn primary" id="addTextBtn">+ Add Text</button>
+            <button class="editor-btn danger" id="deleteLayerBtn">Delete</button>
+          </div>
+          <div>
+            <label>Text</label>
+            <input type="text" id="layerTextInput" placeholder="Type your text...">
+          </div>
+          <div>
+            <label>Font</label>
+            <select id="layerFontSelect">
+              <option value="Inter, sans-serif">Inter</option>
+              <option value="Georgia, serif">Georgia</option>
+              <option value="'Courier New', monospace">Courier</option>
+              <option value="'Brush Script MT', cursive">Script</option>
+              <option value="Impact, sans-serif">Impact</option>
+            </select>
+          </div>
+          <div>
+            <label>Size</label>
+            <input type="range" id="layerSizeInput" min="10" max="160" value="40">
+          </div>
+          <div class="editor-row">
+            <div>
+              <label>Color</label>
+              <input type="color" id="layerColorInput" value="#ffffff">
+            </div>
+            <div>
+              <label>Bold</label>
+              <input type="checkbox" id="layerBoldInput">
+            </div>
+          </div>
+          <div>
+            <label>Layers</label>
+            <div class="editor-layers" id="layersList"></div>
+          </div>
+          <div class="editor-row">
+            <button class="editor-btn primary" id="saveEditBtn" style="flex:1">Save Image</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/static/app.js"></script>
+</body>
+</html>
